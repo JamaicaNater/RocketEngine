@@ -1,0 +1,37 @@
+== RocketEngine
+
+C++ Library consisting of useful tools for 2d PSP game development
+
+== Compilation instructions
+
+[arabic]
+. Download the PSPSDK for your system.
+* For Mac OS / Linux:
+** You can install the SDK
+https://github.com/pspdev/pspdev/releases[here]
+** You may need to run some of the preparation scripts
+https://github.com/pspdev/pspdev[here]
+** After, you can the sdk’s commands to your PATH. Or not, you will need
+to update the makefile to point to your pspsdk/bin/psp-g++
+* For Windows:
+** 🫡 https://www.youtube.com/watch?v=35q-7ITBzSk
+. Run `make`
+
+== Run Instructions
+
+To build and run `make` to build the engine. Alternatively you can just
+navigate to the releases page and download the RocketEngine zip.
+
+== Use Intructions
+
+Once downloaded, to use the library in your project add the include path
+to you command when building the .o files then to build to final
+executable include the path to the librryr and link the library
+
+=== Example
+
+`psp-g++ -I/home/me/path/to/RocketEngine/include -I. -I/home/me/path/to/pspsdk/psp/sdk/include -std=c++14 -fno-rtti $(YOUR_FLAGS_HERE) -D_PSP_FW_VERSION=600 -c -o file.o file.cpp`
+
+`psp-gcc -I/home/me/path/to/RocketEngine/include -I. -I/home/me/path/to/pspsdk/psp/sdk/include -D_PSP_FW_VERSION=600  -L. -L/home/me/path/to/pspsdk/psp/sdk/lib -specs=/home/me/path/to/pspsdk/psp/sdk/lib/prxspecs -Wl,-q,-T/home/me/path/to/pspsdk/psp/sdk/lib/linkfile.prx -L/home/me/path/to/RocketEngine  file.o ... -lrocket_engine -lstdc++ -lm $(other_libs) -o Tutorial.elf`
+
+Note the order of `-lrocket_engine -lstdc++ -lm`. Since rocket_engine leverages code from `-lstdc++ -lm` it is important that the order is maintained.
